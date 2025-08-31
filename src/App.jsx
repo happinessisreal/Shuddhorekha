@@ -1,9 +1,9 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
+import PropTypes from 'prop-types';
 import axios from 'axios';
-import { PieChart, Pie, Cell, ResponsiveContainer, RadialBarChart, RadialBar, Legend, BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip } from 'recharts';
+import { PieChart, Pie, Cell, ResponsiveContainer, BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip } from 'recharts';
 
 // Color schemes for charts
-const BIAS_COLORS = ['#10B981', '#F59E0B', '#EF4444'];
 const POLITICAL_COLORS = {
   'left': '#EF4444',
   'center-left': '#F97316', 
@@ -50,6 +50,13 @@ const GaugeChart = ({ value, title, color, max = 100 }) => {
   );
 };
 
+GaugeChart.propTypes = {
+  value: PropTypes.number.isRequired,
+  title: PropTypes.string.isRequired,
+  color: PropTypes.string.isRequired,
+  max: PropTypes.number
+};
+
 // Political Leaning Meter Component
 const PoliticalLeaningMeter = ({ leaning }) => {
   const positions = {
@@ -86,6 +93,10 @@ const PoliticalLeaningMeter = ({ leaning }) => {
       </div>
     </div>
   );
+};
+
+PoliticalLeaningMeter.propTypes = {
+  leaning: PropTypes.string.isRequired
 };
 
 // Issues List Component
@@ -134,6 +145,14 @@ const IssuesList = ({ issues }) => {
       )}
     </div>
   );
+};
+
+IssuesList.propTypes = {
+  issues: PropTypes.arrayOf(PropTypes.shape({
+    type: PropTypes.string.isRequired,
+    description: PropTypes.string.isRequired,
+    severity: PropTypes.string.isRequired
+  }))
 };
 
 // Loading Spinner Component
