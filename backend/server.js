@@ -66,7 +66,7 @@ app.post('/api/analyze', async (req, res) => {
 
         Parse the HTML: Extract the main title, body text, and any identifiable publisher (e.g., Prothom Alo, The Daily Star, etc.) or author information.
 
-        Context-Aware Analysis: Perform a comprehensive analysis based on the following:
+        Context-Aware Analysis: Perform a comprehensive analysis based on the following. If you lack sufficient information for a thorough analysis (e.g., on media ownership or specific political context), use external searches to find the necessary information.
 
             Political Leaning: Determine if the article shows a clear leaning towards the ideology of a major political party (e.g., Awami League, BNP, Jamaat-e-Islami, Jatiya Party, NCP) or maintains a neutral/centrist stance. Your analysis must reflect the current political landscape and not assume any single party is "the government." Provide a confidence score (0-100).
 

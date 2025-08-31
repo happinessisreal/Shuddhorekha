@@ -65,10 +65,10 @@ function App() {
         {/* Header */}
         <header className="text-center mb-12">
           <h1 className="text-4xl md:text-5xl font-bold text-primary-700 dark:text-primary-400 mb-4">
-            Bangladesh News Analyzer
+            Project Shuddhorekha
           </h1>
           <p className="text-xl md:text-2xl text-slate-600 dark:text-slate-400">
-            Analyze Bangladeshi news articles for bias, clickbait, and misinformation
+            Analyze news articles for bias, clickbait, and misinformation
           </p>
         </header>
         
@@ -77,7 +77,7 @@ function App() {
           <form onSubmit={handleAnalyze}>
             <div className="mb-6">
               <label htmlFor="url-input" className="block mb-2 font-medium text-slate-700 dark:text-slate-300">
-                Enter a Bangladeshi news article URL:
+                Enter a  news article URL:
               </label>
               <input
                 id="url-input"
