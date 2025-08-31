@@ -29,22 +29,8 @@ function App() {
       setError(null);
       setResult(null);
       
-      // ... existing code ...
-      // Step 1: Fetch article content from backend
-      setStep(1);
-      const scrapeUrl = `http://localhost:3001/scrape?url=${encodeURIComponent(url)}`;
-      
-      const scrapeResponse = await fetch(scrapeUrl);
-      
-      if (!scrapeResponse.ok) {
-        const errorData = await scrapeResponse.json();
-        throw new Error(errorData.error || 'Failed to fetch article');
-      }
-      
-      const articleData = await scrapeResponse.json();
-      
-      // Step 2: Call backend for analysis
-      setStep(2);
+      // Step 1: Call backend for scraping and analysis in one go
+      setStep(1); // We can simplify the loading message now
       
       const analyzeUrl = 'http://localhost:3001/api/analyze';
       
@@ -53,28 +39,18 @@ function App() {
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ article: articleData.article }),
+        body: JSON.stringify({ url }), // Send the URL
       });
       
+      const responseData = await analyzeResponse.json();
+
       if (!analyzeResponse.ok) {
-        const errorData = await analyzeResponse.json();
-        throw new Error(errorData.error || 'Failed to analyze article');
+        throw new Error(responseData.error || 'Failed to analyze article');
       }
       
-      const analysisData = await analyzeResponse.json();
-      
-      // Extract the JSON string from the response
-// ... existing code ...
-const jsonString = analysisData.analysis;
-      
-      // Find the start and end of the JSON object
-      const startIndex = jsonString.indexOf('{');
-      const endIndex = jsonString.lastIndexOf('}') + 1;
-      const cleanedJsonString = jsonString.substring(startIndex, endIndex);
-      
-      // Parse the JSON string
-      const parsedResult = JSON.parse(cleanedJsonString);
-      setResult(parsedResult);    } catch (error) {
+      // The backend now returns the final JSON object directly
+      setResult(responseData);
+    } catch (error) {
       console.error('Analysis error:', error);
       setError(error.message || 'An error occurred during analysis');
     } finally {
