@@ -16,7 +16,9 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "docker:build": "docker build -t shuddhorekha-frontend .",
+    "docker:run": "docker run -p 3000:80 shuddhorekha-frontend"
   },
   "devDependencies": {
     "react-scripts": "^5.0.1"
